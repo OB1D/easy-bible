@@ -1,0 +1,233 @@
+{
+ "curricula_pinned.sections.ai-interp": {
+  "corpus": "science",
+  "note": "Linguistics -> neural weights: probing, mechanistic interpretability, compositional semantics, tooling. Drafted 2026-09-11 from a googled resource list; URLs marked UNVERIFIED must be live-probed before pinning (sandbox egress blocked arxiv/aclanthology/openreview/preprints/aaai).",
+  "sources": [
+   {
+    "query": "Belinkov probing survey",
+    "name": "cur_interp_belinkov_probing_classifiers.pdf",
+    "url": "https://arxiv.org/pdf/2102.12452",
+    "title": "Probing Classifiers: Promises, Shortcomings, and Advances (Belinkov, 2021; Computational Linguistics 2022)",
+    "bytes": null,
+    "verify": "known-real, url not probed (sandbox egress blocked)"
+   },
+   {
+    "query": "Hewitt structural probe",
+    "name": "cur_interp_hewitt_manning_structural_probe.pdf",
+    "url": "https://aclanthology.org/N19-1419.pdf",
+    "title": "A Structural Probe for Finding Syntax in Word Representations (Hewitt & Manning, NAACL 2019)",
+    "bytes": null,
+    "verify": "known-real, url not probed"
+   },
+   {
+    "query": "OpenReview probing syntax",
+    "name": "cur_interp_openreview_probing_syntax.pdf",
+    "url": "https://openreview.net/pdf?id=nrZysNmJ0n",
+    "title": "Probing Syntax in Large Language Models (OpenReview id nrZysNmJ0n)",
+    "bytes": null,
+    "verify": "UNVERIFIED: could not confirm the id resolves to a paper"
+   },
+   {
+    "query": "Rai MI review",
+    "name": "cur_interp_rai_mechanistic_interp_review.pdf",
+    "url": "https://arxiv.org/pdf/2407.02646",
+    "title": "A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models (Rai et al., 2024)",
+    "bytes": null,
+    "verify": "known-real, url not probed"
+   },
+   {
+    "query": "Brinkmann symbolic multi-step",
+    "name": "cur_interp_brinkmann_symbolic_multistep.pdf",
+    "url": "https://aclanthology.org/2024.findings-acl.242.pdf",
+    "title": "A Mechanistic Analysis of a Transformer Trained on a Symbolic Multi-Step Reasoning Task (Brinkmann et al., Findings of ACL 2024)",
+    "bytes": null,
+    "verify": "title known-real; anthology id .242 UNVERIFIED"
+   },
+   {
+    "query": "Nagar embeddings compositions",
+    "name": "cur_interp_nagar_embedding_compositions.pdf",
+    "url": "https://aclanthology.org/2025.findings-acl.1104.pdf",
+    "title": "How do Transformer Embeddings Represent Compositions? A Functional Analysis (Nagar et al., Findings of ACL 2025)",
+    "bytes": null,
+    "verify": "title plausible; anthology id .1104 UNVERIFIED"
+   },
+   {
+    "query": "preprints MI language abilities",
+    "name": "cur_interp_preprints_mi_language_abilities.pdf",
+    "url": "https://www.preprints.org/manuscript/202607.1441/download",
+    "title": "Mechanistic Interpretability for Language Abilities in LLMs (preprints.org 202607.1441)",
+    "bytes": null,
+    "verify": "UNVERIFIED: non-peer-reviewed preprint, id not confirmed"
+   },
+   {
+    "query": "AAAI systematic compositionality",
+    "name": "cur_interp_aaai_systematic_compositionality.pdf",
+    "url": "https://ojs.aaai.org/index.php/AAAI/article/view/29788/31362",
+    "title": "Towards Equipping Transformers with Systematic Compositionality (AAAI 2024, article 29788)",
+    "bytes": null,
+    "verify": "UNVERIFIED: article id not confirmed"
+   },
+   {
+    "query": "Cunningham sparse autoencoders",
+    "name": "cur_interp_cunningham_sparse_autoencoders.pdf",
+    "url": "https://arxiv.org/pdf/2309.08600",
+    "title": "Sparse Autoencoders Find Highly Interpretable Features in Language Models (Cunningham et al., 2023)",
+    "bytes": null,
+    "verify": "known-real, url not probed"
+   },
+   {
+    "query": "TransformerLens README",
+    "name": "gh_TransformerLens_README.md",
+    "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/main/README.md",
+    "title": "TransformerLensOrg/TransformerLens README (official library, MIT)",
+    "bytes": null,
+    "verify": "VERIFIED live from sandbox (HTTP 206)"
+   }
+  ]
+ },
+ "sources_watchlist.sources (append)": [
+  {
+   "name": "cur_interp_belinkov_probing_classifiers.pdf",
+   "url": "https://arxiv.org/pdf/2102.12452",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": true,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Belinkov probing survey",
+   "title": "Probing Classifiers: Promises, Shortcomings, and Advances (Belinkov, 2021; Computational Linguistics 2022)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_hewitt_manning_structural_probe.pdf",
+   "url": "https://aclanthology.org/N19-1419.pdf",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": true,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Hewitt structural probe",
+   "title": "A Structural Probe for Finding Syntax in Word Representations (Hewitt & Manning, NAACL 2019)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_openreview_probing_syntax.pdf",
+   "url": "https://openreview.net/pdf?id=nrZysNmJ0n",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": false,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: OpenReview probing syntax",
+   "title": "Probing Syntax in Large Language Models (OpenReview id nrZysNmJ0n)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_rai_mechanistic_interp_review.pdf",
+   "url": "https://arxiv.org/pdf/2407.02646",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": true,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Rai MI review",
+   "title": "A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models (Rai et al., 2024)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_brinkmann_symbolic_multistep.pdf",
+   "url": "https://aclanthology.org/2024.findings-acl.242.pdf",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": false,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Brinkmann symbolic multi-step",
+   "title": "A Mechanistic Analysis of a Transformer Trained on a Symbolic Multi-Step Reasoning Task (Brinkmann et al., Findings of ACL 2024)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_nagar_embedding_compositions.pdf",
+   "url": "https://aclanthology.org/2025.findings-acl.1104.pdf",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": false,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Nagar embeddings compositions",
+   "title": "How do Transformer Embeddings Represent Compositions? A Functional Analysis (Nagar et al., Findings of ACL 2025)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_preprints_mi_language_abilities.pdf",
+   "url": "https://www.preprints.org/manuscript/202607.1441/download",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": false,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: preprints MI language abilities",
+   "title": "Mechanistic Interpretability for Language Abilities in LLMs (preprints.org 202607.1441)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_aaai_systematic_compositionality.pdf",
+   "url": "https://ojs.aaai.org/index.php/AAAI/article/view/29788/31362",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": false,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: AAAI systematic compositionality",
+   "title": "Towards Equipping Transformers with Systematic Compositionality (AAAI 2024, article 29788)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "cur_interp_cunningham_sparse_autoencoders.pdf",
+   "url": "https://arxiv.org/pdf/2309.08600",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": true,
+   "trust": "pending-verify",
+   "why": "curriculum [ai-interp]: Cunningham sparse autoencoders",
+   "title": "Sparse Autoencoders Find Highly Interpretable Features in Language Models (Cunningham et al., 2023)",
+   "proposed": "2026-09-11 00:00:00"
+  },
+  {
+   "name": "gh_TransformerLens_README.md",
+   "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/main/README.md",
+   "dest": "intake",
+   "corpus": "science",
+   "enabled": true,
+   "trust": "github:mit",
+   "why": "curriculum [ai-interp]: TransformerLens README",
+   "title": "TransformerLensOrg/TransformerLens README (official library, MIT)",
+   "proposed": "2026-09-11 00:00:00"
+  }
+ ],
+ "sources_watchlist.sources (disable)": [
+  {
+   "name": "gh_awesome_README.md",
+   "set": {
+    "enabled": false
+   },
+   "reason": "sindresorhus/awesome is a generic link list mis-tagged as linguistics"
+  }
+ ],
+ "skipped": [
+  {
+   "url": "https://mbrenndoerfer.com/writing/probing-classifiers",
+   "reason": "personal blog, HTML only, no licence; content is a gloss on Belinkov 2021 which is included above"
+  },
+  {
+   "url": "https://learnmechinterp.com/topics/transformerlens/",
+   "reason": "third-party tutorial, HTML only; replaced by the official TransformerLens README"
+  },
+  {
+   "url": "https://dl.acm.org/doi/10.1145/3787104",
+   "reason": "ACM Computing Surveys, paywalled; replaced by Cunningham et al. 2023 for the SAE topic"
+  }
+ ],
+ "notes": [
+  "Substitute for the unverified OpenReview 'Probing Syntax in LLMs' entry; this is the canonical structural-probe paper the description matches.",
+  "Verify before enabling. Set enabled=false until confirmed.",
+  "The googled title was garbled; this is the real title. Confirm the id matches.",
+  "Confirm the id matches.",
+  "Verify before enabling. Set enabled=false until confirmed.",
+  "Verify before enabling.",
+  "Open-access stand-in for the paywalled ACM survey (10.1145/3787104), which cannot be fetched.",
+  "Replaces the third-party learnmechinterp.com tutorial page (HTML, no licence)."
+ ]
+}

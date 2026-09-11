@@ -1,0 +1,129 @@
+{
+ "note": "Drafted 2026-09-11. Append-only proposals for sources_watchlist.json. Nothing here has been written to CHIP. 'probe' is what the sandbox saw on 2026-09-11; CHIP re-probes before enabling per curricula rule.",
+ "sources_watchlist.sources (append) — batch A data nodes": [
+  {
+   "name": "glottolog_languages.csv",
+   "url": "https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv",
+   "dest": "intake",
+   "corpus": "linguistics",
+   "enabled": true,
+   "trust": "github:cc-by-4.0",
+   "bytes": 2477017,
+   "why": "Glottolog languoid catalogue (glottocode, ISO 639-3, family, macroarea); data node, not a book",
+   "title": "Glottolog CLDF languages",
+   "proposed": "2026-09-11",
+   "probe": "206 range request, CSV header read"
+  },
+  {
+   "name": "wals_parameters.csv",
+   "url": "https://raw.githubusercontent.com/cldf-datasets/wals/master/cldf/parameters.csv",
+   "dest": "intake",
+   "corpus": "linguistics",
+   "enabled": true,
+   "trust": "github:cc-by-4.0",
+   "why": "WALS typological feature names; data node; candidate seed for linguistics_truths",
+   "title": "WALS CLDF parameters",
+   "proposed": "2026-09-11",
+   "probe": "206 range request, CSV header read"
+  },
+  {
+   "name": "wals_values.csv",
+   "url": "https://raw.githubusercontent.com/cldf-datasets/wals/master/cldf/values.csv",
+   "dest": "intake",
+   "corpus": "linguistics",
+   "enabled": true,
+   "trust": "github:cc-by-4.0",
+   "bytes": 4641862,
+   "why": "WALS feature values per language; data node",
+   "title": "WALS CLDF values",
+   "proposed": "2026-09-11",
+   "probe": "206 range request"
+  }
+ ],
+ "sources_watchlist.sources (append) — batch C lexicon, MAL'S GATE (shelf widening)": [
+  {
+   "name": "cmudict.dict",
+   "url": "https://raw.githubusercontent.com/cmusphinx/cmudict/master/cmudict.dict",
+   "dest": "intake",
+   "corpus": "dictionary",
+   "enabled": false,
+   "trust": "github:bsd-2",
+   "bytes": 3618488,
+   "why": "CMU pronouncing dictionary; chip_source_matrix declares it at library/txt/dictionary/cmudict.dict, loader cmu; independent lineage (cmu)",
+   "title": "CMUdict",
+   "proposed": "2026-09-11",
+   "probe": "206 range request, body read"
+  },
+  {
+   "name": "MorphoLEX_en.xlsx",
+   "url": "https://raw.githubusercontent.com/hugomailhot/MorphoLex-en/master/MorphoLEX_en.xlsx",
+   "dest": "intake",
+   "corpus": "dictionary",
+   "enabled": false,
+   "trust": "github:cc-by-nc-sa-4.0 (check LICENSE in repo)",
+   "bytes": 6767171,
+   "why": "MorphoLex-en morphological segmentation; independent lineage; needs xlsx->csv loader before intake can use it",
+   "title": "MorphoLex-en",
+   "proposed": "2026-09-11",
+   "probe": "206 range request"
+  },
+  {
+   "name": "kaikki.org-dictionary-English.jsonl",
+   "url": "https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl",
+   "dest": "intake",
+   "corpus": "dictionary",
+   "enabled": false,
+   "trust": "wiktionary CC-BY-SA",
+   "bytes": null,
+   "why": "wiktionary-defs declared in chip_source_matrix, not on disk; independent senses+POS; very large (>1 GB)",
+   "title": "Wiktextract English",
+   "proposed": "2026-09-11",
+   "probe": "UNVERIFIED: kaikki.org unreachable from sandbox"
+  }
+ ],
+ "sources_watchlist.sources (disable) — MAL'S GATE": [
+  {
+   "name": "gh_awesome_README.md",
+   "set": {
+    "enabled": false
+   },
+   "reason": "sindresorhus/awesome is a generic link list mis-tagged as linguistics by the thin-domain scout rule"
+  },
+  {
+   "name": "gh_awesome-go_README.md",
+   "set": {
+    "enabled": false
+   },
+   "reason": "avelino/awesome-go is a Go link list mis-tagged as latin"
+  },
+  {
+   "name": "gut_the_hunniwell_boys_and_the_platinum_myst.txt",
+   "set": {
+    "enabled": false
+   },
+   "reason": "boys' adventure novel mis-tagged as latin"
+  }
+ ],
+ "not added": [
+  {
+   "source": "Lingbuzz",
+   "reason": "HTML preprint index, no licence, no stable file"
+  },
+  {
+   "source": "Language (LSA journal)",
+   "reason": "paywalled via Project MUSE"
+  },
+  {
+   "source": "MIT CogNet",
+   "reason": "paywalled, retired to MIT Press Direct"
+  },
+  {
+   "source": "Lingthusiasm",
+   "reason": "podcast transcripts as HTML pages; spoken-register English, not linguistics knowledge"
+  },
+  {
+   "source": "ACL Anthology (site)",
+   "reason": "catalogue, not a file; individual papers are in ai_interp_curriculum_draft.json"
+  }
+ ]
+}
