@@ -130,6 +130,14 @@ Two other doors matter for this plan and are NOT the book pipeline:
 Net: **2 adds (both data nodes), 0 books, 5 skips.** The googled list does not
 supply books for MATRIX-LING. The books are already on disk.
 
+Where a data node lands: `chip_intake` leaves a `.csv` as a node-candidate in
+`data/intake`. It becomes retrievable only when converted to `.jsonl`
+(`{book, page, text}` rows) under `nodes/<name>/` and registered as a new
+block in `cog_sources.json` (`nodes/languages` already exists as the BABEL
+spine block; Glottolog/WALS would be a sibling `nodes/linguistics` block,
+appended, `enabled:true`). That conversion is a small script, not yet written;
+it is task 14 below.
+
 ### A2. The recipe for MATRIX-LING (books, in order)
 
 Order is the recipe. Primer first so every later sense lands on fixed ground.
@@ -304,6 +312,7 @@ Each row: who acts, what the gate is, what "done" looks like.
 | 11 | `--seal MATRIX-LING` | Mal | Mal | sealed; `--status` shows it |
 | 12 | P22 → P12 decision on `linguistics_core.json` | Mal | Mal | decision recorded in `decisions.jsonl` |
 | 13 | Intake plan then apply for fetched batch A/B files | Dispatch | plan reviewed | files on shelf, node-candidates in `data/intake` |
+| 14 | Glottolog/WALS csv → `nodes/linguistics/*.jsonl` + new `cog_sources.json` block | Dispatch writes the converter; Mal enables the block | after 13 | block present, retrieval returns a cited WALS row |
 
 Tasks 1, 2, 3, 4, 5, 7, 12 are independent of each other and can run in
 parallel with whatever else the fleet is doing. Task 9 is the only one that
