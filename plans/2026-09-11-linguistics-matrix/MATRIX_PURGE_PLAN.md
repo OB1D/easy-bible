@@ -175,7 +175,7 @@ Gate after book 1: read `MATRIX/MATRIX-LING/mind_ledger.jsonl`. If
 - **Catalogue Sapir.** `sapir_language.txt` is on the shelf but not in
   `library_catalog.json`. Run the shelf's catalogue pass (`chip_shelf.py`) so
   it gets a `CHIP-BK-` id. Append, do not regenerate the catalog.
-- **Watchlist appends** (new rows, `enabled:true` only after CHIP probes the URL):
+- **Watchlist appends** (new rows; URLs verified from the sandbox, CHIP re-probes before the ring fetches):
 
 ```json
 {"name": "glottolog_languages.csv", "url": "https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv",
@@ -294,7 +294,7 @@ Each row: who acts, what the gate is, what "done" looks like.
 | 1 | Check `chip_lexicon.py` on CHIP is the real file (Drive mirror shows 392 bytes) | Dispatch | none | size and `python -m py_compile` reported |
 | 2 | Catalogue `sapir_language.txt` | Dispatch on CHIP | none (append) | `CHIP-BK-` id exists in `library_catalog.json` |
 | 3 | Three watchlist disables (section 1) | Mal | Mal | rows carry `enabled:false` and a `why` |
-| 4 | Three Glottolog/WALS watchlist rows, `enabled:false` | Dispatch appends | URL probe on CHIP → Mal flips enabled | rows appended, probe result logged |
+| 4 | Three Glottolog/WALS watchlist rows (URLs verified from sandbox; Mal decides `enabled`) | Dispatch appends | CHIP re-probes; Mal confirms enabled | rows appended, probe result logged |
 | 5 | `curricula_pinned` section `ai-interp` (new section or sibling file) | Dispatch | URL probes on CHIP; Mal for `verified:true` | section present, `bytes` filled |
 | 6 | `chip_curricula.py ai-interp --dry` → apply | Dispatch | after 5 | watchlist rows appended with `verified-direct` |
 | 7 | `chip_source_matrix.py --matrix` verdict run | Dispatch | none (read-only) | verdict table reported to Mal |
