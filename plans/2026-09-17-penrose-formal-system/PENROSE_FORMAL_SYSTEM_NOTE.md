@@ -582,3 +582,57 @@ plans can carry a tuple-valued element (an address is a sequence, not a
 token). If plans hold only sets of tokens, addresses serialise to strings
 with a fixed alphabet, which is what Tatham does, and nothing is lost. The
 selftest is the truth either way, per the order's own rule.
+
+---
+
+## 11. GAR and transformers (added 2026-09-17, fourth question)
+
+Question asked: when an AI walks its weights and tensors, can GAR work as
+a transformer? Answer: not as a transformer, by doctrine (II, "the learner
+without weights"); but as the exact counterpart of what a transformer does
+approximately, and as the target language for what interpretability reads
+back out of one. This ties GAR to batch B of the MATRIX purge plan
+(`ai-interp` curriculum).
+
+**Correspondence.** KNOWN as a description, MINE as the mapping to GAR.
+
+| Transformer | GAR |
+|---|---|
+| embedding (position in R^d) | address, exact |
+| attention (retrieval weighted by similarity) | similarity as an exact fraction, then intersect / slice |
+| layers (composition) | plan steps steering steps (CC) |
+| residual stream | exact sets in memory (EE) |
+| gradient descent | precedent rank by replay and grade (II) |
+
+GAR is a hard-attention, weightless transformer.
+
+**The bridge, compile direction.** RASP (Weiss, Goldberg, Yahav, "Thinking
+Like Transformers", ICML 2021): a language of select / aggregate /
+elementwise operations whose programs are transformers by construction.
+Tracr (Lindner et al., DeepMind, 2023): compiles RASP programs into actual
+transformer weights. A GAR plan is a RASP program with exact set semantics,
+so a plan can be compiled to weights that compute it. RECALLED for exact
+venues; the tools are real and public.
+
+**The bridge, decompile direction.** Mechanistic interpretability recovers
+circuits, i.e. discrete operations over addressed features, from trained
+weights. That is batch B: Belinkov (probing), Hewitt & Manning (structural
+probe), Cunningham et al. (sparse autoencoders), TransformerLens. GAR's
+plan language is a place to write a recovered circuit so it can be
+replayed, graded and refused. This is the concrete use. MINE.
+
+**The Gödel line, again.** A single forward pass is a bounded-depth
+circuit and provably limited in the languages it recognises (Hao, Angluin,
+Frank 2022, hard-attention transformers; Merrill & Sabharwal 2023, TC0 and
+chain of thought; RECALLED). Only the unbounded autoregressive loop lifts a
+transformer to universality. Same split as inflate-to-level-n (section 5a)
+versus a CA on the tiling (5c). GAR keeps the loop bounded by depth (FF
+closure "with depth"), which is why it stays gradeable.
+
+**Penrose here.** Only as an address scheme for positions, if at all.
+Positional encodings are already geometric (rotations by angle). An
+aperiodic address scheme for a residual stream is an idea, not a result;
+nothing found published. MINE, thin. Not proposed.
+
+**Not to do.** Do not read this as licence to put weights in GAR, or to
+put GAR in the loop of a model. The doctrine's line is the value.
