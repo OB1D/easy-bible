@@ -636,3 +636,45 @@ nothing found published. MINE, thin. Not proposed.
 
 **Not to do.** Do not read this as licence to put weights in GAR, or to
 put GAR in the loop of a model. The doctrine's line is the value.
+
+---
+
+## 12. Try with a tongue (added 2026-09-17, fifth question)
+
+Question asked: try with a tongue? Read as: apply the same analysis to a
+natural language. Answer: yes, and the tongue is Latin.
+
+**A tongue has the Gödel line inside it.**
+
+| Layer | Class | Below or above the line | GAR analogue |
+|---|---|---|---|
+| morphology | regular relation; finite-state transducer (Koskenniemi 1983; Kaplan & Kay 1994), the same tool as Tatham's Penrose coordinates | below: exact, addressed (lemma + paradigm slot), sizes known before the step runs | a `garmorph` step, analogue of `gargeom` |
+| syntax | mildly context-sensitive (Joshi), polynomial parsing | below, just: decidable, gradeable against a treebank | parse as an operation, later |
+| meaning | open-ended | above | HH `garmeaning` stops at meaning-by-address over glosses; MM states the refusal |
+
+KNOWN for the classes; MINE for the mapping.
+
+**Why Latin.** Paradigms are closed and fully written down; Allen &
+Greenough and Bennett are on the CORE shelf (DEC-0002). Five declensions,
+four conjugations, fixed cases, numbers, tenses, moods, voices: the counts
+are known before the step runs, exactly as inflation counts are. English
+morphology is thin and its syntax leans on meaning; the line is blurrier.
+
+**Draft step `garmorph` (not filed; Mal's gate).** Transducer built from
+the two grammars. Operations: inflect, parse, paradigm, lemma, agree, each
+with its size and addresses; GAR's set operations apply unchanged to sets
+of forms. Selftest: every generated form is recognised by the reverse
+transducer; paradigm sizes equal the grammar's tables; two wordings, same
+plan and addresses (PP); coverage equals the fraction of the grammar's
+paradigms encoded (MM). Needs BB, FF; sits beside QQ.
+
+**Transformer side.** Probes recover exactly these two layers from a
+language model: Hewitt & Manning (syntax trees in embeddings), Belinkov's
+survey (morphology and syntax probes), both in batch B. For a tongue, the
+decompile target is the part GAR would hold exactly; the meaning layer is
+what the model has and GAR refuses by MM.
+
+**Door.** Morphology tables are a data node, not a book (like Glottolog
+and WALS in batch A): they land under `nodes/`, not in a lattice or A-Z.
+MATRIX-LING reads the grammars as books; `garmorph` reads them as tables.
+Two doors, same shelf. DEC-0004 by analogy.
