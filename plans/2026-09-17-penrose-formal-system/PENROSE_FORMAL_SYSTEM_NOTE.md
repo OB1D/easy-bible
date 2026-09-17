@@ -497,3 +497,88 @@ second-order theories and automata on infinite trees", Trans. AMS 141
 (1969); T. Franzén, *Gödel's Theorem: An Incomplete Guide to Its Use and
 Abuse* (2005); H. Putnam, review of *Shadows of the Mind*, Bull. AMS 32
 (1995); S. Feferman, "Penrose's Gödelian argument", Psyche 2 (1995).
+
+---
+
+## 10. GAR and the Penrose system (added 2026-09-17, third question)
+
+Question asked: does this mean GAR can embed the Penrose system into the
+MATRIX? Source for GAR: the work order filed 2026-09-16 for GAR, the
+Geometry Algebra Reasoner (`chip_gar_20260916.py`, GA_0001), nine parts BB
+to PP. Not in this repo; read from Mal's upload. What it fixes:
+
+- product bar: "every answer a plan of exact operations over sets,
+  sequences and counts, each step with its size and addresses; the same
+  question gives the same answer; the eval grades by rule and a drop refuses
+  the change";
+- operations: intersect, union, minus, follows, contrast, slice,
+  read-paragraph, ratio, closure (with depth), similarity as an exact
+  fraction, absence, as-of;
+- plans are data, stored, replayed, re-graded (BB, CC); memory keeps exact
+  sets (EE); the sequence index runs over every shelf (GG); coverage stated
+  before every answer (MM); faults refused before serving (NN); one voice,
+  same plan and addresses for two wordings (PP).
+
+None of the nine parts contains a geometric operation. "Geometry" in the
+name is not yet cashed. That is the opening.
+
+### 10a. Three readings, three answers
+
+| "Embed" means | Answer | Door |
+|---|---|---|
+| **Knowledge.** Penrose texts on a shelf, a MATRIX that read them, GAR's sequence index over them, GAR answering "which papers on Penrose tilings cite Berger and state universality" | Yes, today, no new code | shelf → recipe → `--on` → GG indexes the shelf. Ordinary. Mal's gate to open the vessel |
+| **Algebra.** The Penrose formal system's own operations (inflate, compose, legal, address, neighbour, patch-at-address, exact φ-ratios) added to GAR's operation set, so tiles become addressed elements GAR's set algebra already handles | Yes, and it fits the product bar exactly; one new work-order step | a step in the GAR order, selftest acceptance, same form as FF (`garops`). Draft below |
+| **Substrate.** A universal cellular automaton on the tiling (section 5c) running inside GAR or a MATRIX | No | a CA run has no size bound and its halting is undecidable (section 9). It cannot be "a plan with its size" and "the same answer every time" is not guaranteed. Above the line; GAR is built to stay below it |
+
+### 10b. Why the second reading fits
+
+Match the product bar to the Penrose system, item by item:
+
+| Product bar | Penrose instance | Section |
+|---|---|---|
+| exact operations | inflate, compose, legality are integer-exact in Z[φ]; no floats | 2b, 4 |
+| each step with its size | tile counts per inflation level are the Fibonacci-matrix prediction, known before the step runs | 2b |
+| each step with its addresses | combinatorial coordinates give every tile a finite address; neighbours by finite-state transducer | 5b |
+| the same question gives the same answer | local isomorphism: the radius-r patch at an address is the same in every model, by theorem, not by seed | 3 |
+| graded by rule, a drop refuses | legality is decidable, so every graded answer has a ground truth the eval can compute, not a judgment | 3, 9 |
+| coverage stated before answering (MM) | a patch either composes to bounded size or fails at a known depth; coverage is the depth reached | 3 |
+| faults refused before serving (NN) | a deception is a planted fault the system detects by construction | 3 |
+| the ratio operation | φ:1 tile frequency, the inflation matrix, exact in Z[φ]; the golden ratio is the first ratio GAR would hold exactly rather than as a count fraction | 4 |
+
+Everything on the right terminates, has a size, and is replayable. That is
+the Gödel line of section 9 stated as an engineering rule: GAR embeds the
+decidable geometry (5a, 5b, the decision procedure) and does not embed the
+universal substrate (5c).
+
+### 10c. Draft work-order step
+
+Same form as the nine steps in the order. File
+`gar_step_gargeom_draft.json` travels with this note. Not filed; Mal's gate.
+
+```json
+{
+ "id": "QQ",
+ "verb": "gargeom",
+ "title": "the first geometric algebra in GAR: Penrose rhombus tiles as addressed elements - inflate(patch,n), compose(patch), legal(patch), address(tile), neighbours(address), patch(address,r), ratio in Z[phi] exact - every op with its size (Fibonacci-matrix count) and its addresses (combinatorial coordinates, Tatham's transducers); GAR's set ops (intersect, minus, contrast, slice) apply unchanged to sets of tile addresses; no cellular automaton on the tiling, ever (no size bound, halting undecidable)",
+ "needs": ["BB", "FF"],
+ "accept": {"kind": "selftest", "script": "chip_gargeom_YYYYMMDD.py"},
+ "why": "GAR is named for geometry and holds none; the Penrose system is the one geometry whose every question is decidable, so it can be graded by rule",
+ "selftest": [
+  "counts per level equal the inflation-matrix prediction for n = 1..8",
+  "every inflated patch is legal; every planted deception (3-tile and one per scale up to level 5) is refused with its depth",
+  "two independently generated tilings agree on every radius-r patch at matching addresses, r up to the local-isomorphism bound",
+  "the same question, two wordings, two sessions: identical plan and addresses (the PP test on geometric asks)",
+  "coverage stated before each answer equals the composition depth reached",
+  "no floating point anywhere in the module: all coordinates in Z[phi]"
+ ],
+ "excluded": "any CA or growth-by-local-rule on the tiling; any patch that is not an inflation image or a checked input"
+}
+```
+
+### 10d. What I could not check
+
+The twelve shapes, how FF registers a new operation, and whether GAR's
+plans can carry a tuple-valued element (an address is a sequence, not a
+token). If plans hold only sets of tokens, addresses serialise to strings
+with a fixed alphabet, which is what Tatham does, and nothing is lost. The
+selftest is the truth either way, per the order's own rule.
