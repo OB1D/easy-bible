@@ -639,10 +639,15 @@ put GAR in the loop of a model. The doctrine's line is the value.
 
 ---
 
-## 12. Try with a tongue (added 2026-09-17, fifth question)
+## 12. Try with a tongue (added 2026-09-17, fifth question) — MISREAD, see 13
 
-Question asked: try with a tongue? Read as: apply the same analysis to a
-natural language. Answer: yes, and the tongue is Latin.
+Question asked: try with a tongue? Read here as: apply the same analysis
+to a natural language. That was wrong: Mal's "Tongue" is a tensor section
+pulled from an LLM (section 13). The Latin analysis below stands on its
+own as a possible bench, but it is not what was asked. Kept, not deleted
+(HOLD 2026-08-31).
+
+Answer as given: yes, and the tongue is Latin.
 
 **A tongue has the Gödel line inside it.**
 
@@ -678,3 +683,56 @@ what the model has and GAR refuses by MM.
 and WALS in batch A): they land under `nodes/`, not in a lattice or A-Z.
 MATRIX-LING reads the grammars as books; `garmorph` reads them as tables.
 Two doors, same shelf. DEC-0004 by analogy.
+
+---
+
+## 13. Try with a Tongue, corrected (added 2026-09-17, sixth message)
+
+Definition from Mal: a **Tongue** is a tensors section pulled out of an
+LLM. So the question was: can GAR work over a Tongue?
+
+**A Tongue is already a GAR object.** A finite table; every entry has a
+native address (layer, head, row, column); its size is known before any
+step runs; every float is an exact dyadic rational, so read as a fraction
+it is exact. Meets the product bar as it stands. KNOWN for the facts,
+MINE for the fit.
+
+Doctrine: GAR holds no weights (II). GAR reading weights as cited data is
+a different thing and is what DEC-0004 already says about the interp
+papers. A Tongue is expert data.
+
+**Existing GAR operations on a Tongue, unchanged.**
+
+| GAR op | On a Tongue |
+|---|---|
+| slice | a head, a row, a column, a token's embedding |
+| contrast | two heads, two layers, the same head in two models |
+| ratio | norms, singular-value ratios, share of a head's weight on a token set |
+| similarity (exact fraction) | shared top-k neighbours in embedding space between two tokens; ties explicit, never broken by float order |
+| closure with depth | matrix products across layers: the QK and OV circuits of Elhage et al., "A Mathematical Framework for Transformer Circuits" (2021), exactly computable to bounded depth |
+| absence | a token set a head never attends to (by threshold, stated) |
+| as-of | model version / checkpoint |
+
+**Draft step `gartongue` (not filed; Mal's gate).** Beside QQ `gargeom`.
+Load a Tongue from safetensors; address every entry; exact rational matrix
+product; exact top-k; the logit-lens walk from a token's embedding through
+the residual stream to the unembedding (nostalgebraist 2020, RECALLED as
+the origin; direct logit attribution in TransformerLens). Selftest: reload
+gives identical addresses and values; GAR's exact product agrees with the
+float library to a stated tolerance while GAR's own is exact; the same
+question twice gives the same plan (PP); coverage equals the fraction of
+the model's tensors held (MM); a planted corruption (a swapped row) is
+refused before any answer (NN). Needs BB, FF. Batch B is the manual; the
+TransformerLens README is the one batch B URL already VERIFIED live.
+
+**Where the earlier sections land.** The Gödel line (9) runs through the
+model, not the Tongue: the Tongue is a finite table, below the line; the
+loop that runs the model is above it. Penrose (5b) is not needed: a Tongue
+has native addresses. Section 11 becomes literal: what GAR recovers by
+walking a Tongue is a circuit, and a circuit is a plan.
+
+**Cautions.** A Tongue is a data node like Glottolog (batch A), not a
+book: under `nodes/`, never in a lattice or A-Z. Its row should carry the
+source model's name and licence the way watchlist rows carry `trust`.
+Exact rational arithmetic on a full head (e.g. 4096×128) is slow but
+finite; fixed-point integers are the fallback, with the scale stated.
