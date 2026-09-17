@@ -1,0 +1,21 @@
+{
+ "_note": "DRAFT step for the GAR work order (chip_gar_20260916.py GA_0001), drafted 2026-09-17 with PENROSE_FORMAL_SYSTEM_NOTE.md section 10. Not filed. Same rule as the order: a step is DONE when its check passes, never when its task was run; a step whose script does not exist is NOT BUILT and named. Mal's gate to file it.",
+ "step": {
+  "id": "QQ",
+  "verb": "gargeom",
+  "title": "the first geometric algebra in GAR: Penrose rhombus tiles as addressed elements - inflate(patch,n), compose(patch), legal(patch), address(tile), neighbours(address), patch(address,r), ratio in Z[phi] exact - every op with its size (Fibonacci-matrix count) and its addresses (combinatorial coordinates, Tatham's transducers); GAR's set ops (intersect, minus, contrast, slice) apply unchanged to sets of tile addresses; no cellular automaton on the tiling, ever (no size bound, halting undecidable)",
+  "needs": ["BB", "FF"],
+  "accept": {"kind": "selftest", "script": "chip_gargeom_YYYYMMDD.py"},
+  "why": "GAR is named for geometry and holds none; the Penrose system is the one geometry whose every question is decidable, so it can be graded by rule",
+  "selftest": [
+   "counts per level equal the inflation-matrix prediction for n = 1..8",
+   "every inflated patch is legal; every planted deception (3-tile and one per scale up to level 5) is refused with its depth",
+   "two independently generated tilings agree on every radius-r patch at matching addresses, r up to the local-isomorphism bound",
+   "the same question, two wordings, two sessions: identical plan and addresses (the PP test on geometric asks)",
+   "coverage stated before each answer equals the composition depth reached",
+   "no floating point anywhere in the module: all coordinates in Z[phi]"
+  ],
+  "excluded": "any CA or growth-by-local-rule on the tiling; any patch that is not an inflation image or a checked input",
+  "sources": "PENROSE_FORMAL_SYSTEM_NOTE.md sections 2b, 3, 4, 5b, 9; Tatham arXiv 2512.16595 for the transducers (egress-blocked from the sandbox, fetch on CHIP before build)"
+ }
+}
