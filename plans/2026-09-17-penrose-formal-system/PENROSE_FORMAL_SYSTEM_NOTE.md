@@ -1,14 +1,16 @@
 # PENROSE GEOMETRY AS A FORMAL COMPUTATIONAL SYSTEM — assessment note
 
 Drafted 2026-09-17 for Mal, from the one-line prompt "Penrose geometry can
-become a formal computational system." Status: ASSESSMENT, nothing dispatched.
-Nothing here touches C:\CHIP or D:\Atlas. Section 6 is a proposal for the
-review gate; it does not run until the gate says so.
+become a formal computational system." Revised the same day after an online
+check of GitHub and the literature (section 8). Status: ASSESSMENT, nothing
+dispatched. Nothing here touches C:\CHIP or D:\Atlas. Section 6 is a proposal
+for the review gate; it does not run until the gate says so.
 
 Standing rule applied throughout: measured, not assumed. Every claim below is
-tagged KNOWN (standard textbook result, citation in section 7), RECALLED
-(I believe it is in the literature, citation should be checked before it is
-relied on), or MINE (my own reasoning, not a published result).
+tagged KNOWN (standard textbook result), VERIFIED (citation confirmed online
+today, see section 7 for what "confirmed" means under the sandbox's limits),
+RECALLED (I believe it is in the literature, not confirmed today), or MINE
+(my own reasoning, not a published result).
 
 ---
 
@@ -20,37 +22,43 @@ formal computational systems, and that changes what "become" means.
 
 | Object | What it is | Formal status today |
 |---|---|---|
-| **Penrose tilings** (P1 pentagons, P2 kite/dart, P3 thick/thin rhombs) | aperiodic tilings of the plane forced by local matching rules | Formal in four independent ways (section 2), but not by themselves a universal computer (section 3). **This note assumes this is what was meant.** |
+| **Penrose tilings** (P1 pentagons, P2 kite/dart, P3 thick/thin rhombs) | aperiodic tilings of the plane forced by local matching rules | Formal in four independent ways (section 2); universal computation on them is proven (section 5c); already used as a quantum error-correcting code (section 3). **This note assumes this is what was meant.** |
 | **Spin networks** (Penrose 1971) | trivalent graphs labelled by half-integers; the binor calculus evaluates them combinatorially | Already a formal calculus. Evaluation is a well-defined recursive algorithm. Basis of loop quantum gravity. |
 | **Penrose graphical (tensor) notation** | diagrams for tensor contraction | Already a formal notation; the modern form is string diagrams for monoidal categories, which is a full rewriting calculus. |
 
+Name collision to avoid in any search: "Penrose" is also a diagram-drawing
+language from CMU (penrose.cs.cmu.edu), unrelated. KNOWN.
+
 If Mal meant spin networks or the diagram notation, the answer is "it already
 is one; the work is picking a rewriting engine". The rest of this note is
-about the tilings, where the question is real.
+about the tilings.
 
 ---
 
-## 1. Verdict in four lines
+## 1. Verdict in five lines
 
 1. **Yes, as a formal system.** The tilings have an alphabet, axioms, inference
    rules, theorems, a decision procedure for theoremhood, and a canonical
-   address for every symbol. Section 4 writes that skeleton down. KNOWN parts
-   throughout; nothing needs inventing.
+   address for every symbol. Section 4 writes that skeleton down. Nothing
+   needs inventing.
 2. **No, as a computer in the geometry alone.** A Penrose tiling carries
    essentially zero information: its entropy is zero, and the whole tiling is
    fixed by a handful of real parameters. A program has to be *placed on* the
    tiling, it cannot be *the* tiling. Section 3.
-3. **Yes, as a substrate.** Cellular automata on Penrose tilings support
-   gliders (RECALLED, Goucher 2012), which is the usual first step toward
-   universality. Self-assembly models in which tiles compute are Turing
-   universal in general (KNOWN, Winfree). Section 5.
-4. **The interesting formal object is the address, not the tile.** Every tile
-   in a Penrose tiling has an infinite hierarchical address (its chain of
-   parents under composition). Two tilings are the same up to translation iff
-   their addresses agree eventually. That is a 2-D numeration system, the
-   plane analogue of Zeckendorf / Fibonacci coding. If anything in the fleet
-   should use Penrose structure, it is that: an aperiodic, self-similar,
-   repetitive coordinate scheme. Section 5b.
+3. **Yes, as a substrate, and this is settled.** Universal cellular automata
+   on the kite-and-dart tiling were published in 2012–2013 (Imai, Hatsuda,
+   Poupet, Sato; Sato, Imai, Iwamoto), and a Life-isomorphic automaton on any
+   multigrid tiling in 2017 (Bailey, Lindsey). VERIFIED. Section 5c.
+4. **The address is the interesting formal object, and it is already built.**
+   Every tile has an infinite hierarchical address; Penrose tilings are
+   classified by 0/1 index sequences with no two consecutive 1s, which is
+   exactly the Zeckendorf constraint. Simon Tatham has implemented
+   "combinatorial coordinates" with finite-state transducers for Penrose, hat
+   and spectre (2024–2025). VERIFIED. Section 5b.
+5. **The standout use is the one where the "defect" is the feature.** Li and
+   Boyle (2023) showed the Penrose tiling is a quantum error-correcting code
+   precisely because no local measurement can distinguish two tilings and
+   any bounded erasure is recoverable from the outside. VERIFIED. Section 3.
 
 ---
 
@@ -70,7 +78,10 @@ rhombus tiling. KNOWN.
 This is a constraint-satisfaction system with a finite local rule set, i.e.
 exactly the form of a Wang tile set. Any marked tile set converts to Wang
 tiles (KNOWN, Grünbaum & Shephard 11.1), so Penrose tilings are a
-sub-language of the Wang-tile language.
+sub-language of the Wang-tile language. In symbolic-dynamics terms the
+Penrose tilings form a *sofic* shift: Goodman-Strauss proved that almost
+every substitution tiling admits local matching rules, and Vereshchagin
+(2026) reduced the hypothesis to finite local complexity. VERIFIED (abstract).
 
 ### 2b. Substitution (inflation / deflation) — a rewriting system
 
@@ -81,7 +92,8 @@ is the "recognizability" property, and it is what forces aperiodicity).
 This is a 2-D L-system: a deterministic parallel rewriting system on a
 2-letter alphabet with geometric placement. Its 1-D shadow is the Fibonacci
 substitution `a → ab, b → a`, and the tile-count matrix is the Fibonacci
-matrix `[[1,1],[1,0]]` with Perron eigenvalue φ. KNOWN.
+matrix `[[1,1],[1,0]]` with Perron eigenvalue φ. KNOWN. Several GitHub
+generators are literally L-systems (section 8).
 
 ### 2c. Cut-and-project — an arithmetic semantics
 
@@ -97,13 +109,14 @@ analogue here. MINE as a statement; the underlying construction is KNOWN.
 
 ### 2d. Tiling space as a dynamical system / C*-algebra
 
-The set of all Penrose tilings, modulo translation, is a compact space with a
-Z^2 (translation) action. It is minimal, uniquely ergodic, has zero
-topological entropy, and is almost-everywhere conjugate to a rotation on a
-4-torus (RECALLED, E. A. Robinson Jr 1996). Connes uses the same space as his
-opening example of a non-commutative space: the AF C*-algebra built from the
-substitution's Bratteli diagram, with K_0 ≅ Z + Zφ ordered by the golden
-ratio (KNOWN, Connes 1994, ch. II).
+The set of all Penrose tilings, modulo translation, is a compact space with an
+R^2 (translation) action. It is strictly ergodic, has zero topological
+entropy, and is an almost 1:1 extension of a minimal rotation on the 4-torus;
+inflation is an almost 1:1 extension of a hyperbolic toral automorphism.
+VERIFIED (E. A. Robinson Jr, Trans. AMS 348 (1996) 4447–4464). Connes uses
+the same space as his opening example of a non-commutative space: the AF
+C*-algebra built from the substitution's Bratteli diagram, with K_0 ≅ Z + Zφ
+ordered by the golden ratio (KNOWN, Connes 1994, ch. II).
 
 That last object is a purely combinatorial formal system (a Bratteli diagram
 is a graded graph; the AF algebra is its inductive limit) and its K-theory is
@@ -112,7 +125,7 @@ the geometry.
 
 ---
 
-## 3. What the geometry cannot be on its own
+## 3. What the geometry cannot be on its own — and where that is the point
 
 **Zero entropy.** The number of distinct legal patches of radius r grows
 polynomially in r, not exponentially (KNOWN, finite local complexity plus
@@ -121,7 +134,11 @@ exponentially. So a Penrose tiling cannot encode an arbitrary computation in
 its tile pattern the way a Wang tiling can encode a Turing machine history
 (Berger 1966, KNOWN). Contrast Kari's 14 aperiodic Wang tiles (KNOWN, Kari
 1996): those are aperiodic *because* each row performs a multiplication on a
-Beatty sequence. Kari's tiles compute; Penrose's tiles are computed.
+Beatty sequence. Kari's tiles compute; Penrose's tiles are computed. Labbé
+(2024) pushes the Kari side further: a family of aperiodic Wang tile sets
+defined as instances of a "square-shaped computer chip" whose inputs and
+outputs are 3-vectors of integers, covering every metallic mean, with the
+golden-ratio case containing Ammann's 16 tiles. VERIFIED (abstract).
 
 **Uncountably many models, all locally identical.** Every finite patch that
 appears in one Penrose tiling appears in every other, within a distance
@@ -133,13 +150,30 @@ finite radius. That is a feature for a coordinate scheme (every address
 scheme works everywhere) and a defect for a memory (you cannot store a bit
 in the geometry).
 
+**And that defect is exactly what Li and Boyle used.** "The Penrose Tiling
+is a Quantum Error-Correcting Code" (arXiv 2311.13040, Nov 2023): code
+states are superpositions over an equivalence class of tilings; local
+indistinguishability means no bounded measurement can read the logical
+information, and *local recoverability* (the tiles deleted from any bounded
+region are uniquely determined by the tiles outside it) means any bounded
+erasure, however large, is correctable. Variants on Ammann–Beenker and
+Fibonacci tilings live on finite tori and in discrete spin systems. A 2026
+follow-up does the same for the hat and spectre monotiles (arXiv
+2607.15326). VERIFIED (abstracts, Quanta coverage Feb 2024, Error Correction
+Zoo entry). This is the strongest existing sense in which Penrose geometry
+*is* a computational system: not a processor, a memory whose protection is
+the geometry.
+
 **Growth is not local.** A tiling cannot be grown one tile at a time by a
 rule that looks only at nearby tiles: there exist "deceptions" of arbitrary
 order, patches that satisfy the matching rules everywhere but cannot be
-extended (KNOWN, Penrose; Grünbaum & Shephard 10.5). Vertex-rule growth needs
-some non-local information (RECALLED, Onoda–Steinhardt–DiVincenzo–Socolar
-1988). This is the point Penrose himself leaned on in *The Emperor's New
-Mind* (KNOWN that he argued it; whether the argument holds is contested).
+extended (KNOWN, Penrose; Grünbaum & Shephard 10.5; a deception can be as
+small as three tiles and exists at every inflation scale, VERIFIED via
+Onoda et al.). Vertex-rule growth with local rules is possible if the rules
+are richer than the arrow-matching rules (VERIFIED, Onoda, Steinhardt,
+DiVincenzo, Socolar, PRL 60 (1988) 2653–2656). This is the point Penrose
+himself leaned on in *The Emperor's New Mind* (KNOWN that he argued it;
+whether the argument holds is contested).
 
 **But legality of a finite patch is decidable.** Compose (deflate) the patch
 repeatedly. Composition on a legal patch is unique and always succeeds; on an
@@ -167,8 +201,9 @@ version (P3); kite/dart is the same with a different table.
 | Inference rule 2 | extension: add a tile whose every shared edge matches | KNOWN (this rule alone does not preserve legality; see deceptions) |
 | Theorems | legal patches (those extendable to an infinite legal tiling) | KNOWN |
 | Decision procedure | repeated composition until bounded size, then table lookup | RECALLED, see 3 |
-| Canonical form / address | for a tile x: the sequence (type of x, type of parent(x), type of parent²(x), …) with the position of each in its parent; two tilings coincide up to translation iff addresses agree past some level | KNOWN (Conway index sequence; Robinson 1996) |
+| Canonical form / address | for a tile x: the sequence (type of x, type of parent(x), type of parent²(x), …) with the position of each in its parent; a Penrose tiling is determined by a 0/1 index sequence with no two consecutive 1s, and two sequences give the same tiling iff they agree from some position on | VERIFIED (Conway index sequence, Grünbaum & Shephard; Robinson 1996; Tatham's combinatorial coordinates) |
 | Semantics | cut-and-project: model = a choice of offsets γ in the internal space; interpretation of a tile = a lattice point of Z^5 whose projection lands in the window | KNOWN |
+| Language class | sofic shift (local matching rules exist for the substitution) | VERIFIED (Goodman-Strauss; Vereshchagin 2026) |
 | Invariants | tile-frequency ratio φ:1; inflation matrix [[2,1],[1,1]] for rhombs; K_0 = Z + Zφ | KNOWN |
 | Complexity | patch counting polynomial; entropy 0; local isomorphism radius linear in patch size | KNOWN |
 
@@ -188,59 +223,82 @@ computer: it computes exactly the Penrose patches and nothing else. Its
 value is as a generator and as a *test oracle* for 5b and 5c, not as a
 general engine.
 
-### 5b. The address system (the tiling as memory layout)
+### 5b. The address system (the tiling as memory layout) — already built
 
 Treat the Conway address as a numeration. In 1-D the analogue is exact:
 positions in the Fibonacci word are Zeckendorf numerals (sums of non-adjacent
-Fibonacci numbers), and the substitution is the carry rule. In 2-D the
-address gives every tile a unique hierarchical name, neighbours are found by
-a bounded "carry" across levels, and the local-isomorphism theorem
-guarantees the same naming works in every model. MINE as a design; the
-pieces are KNOWN.
+Fibonacci numbers), and the substitution is the carry rule. In 2-D the index
+sequence of a Penrose tiling is *literally* a 0/1 sequence with no two
+consecutive 1s (the Zeckendorf condition), so the analogy is a theorem, not
+a metaphor. VERIFIED (ICERM Solomyak tutorial; neverendingbooks summary of
+Grünbaum & Shephard).
+
+The engineering is done. Simon Tatham's "combinatorial coordinates" give
+every tile its hierarchy address without geometry, and finite-state
+transducers walk from a tile to its neighbours by a bounded carry across
+levels. Covered: Penrose P2/P3, hat, spectre. Two substitution systems for
+the hat are "unambiguous": a single tile address determines the whole plane.
+Blog series 2024 ("Beyond the wall", "Combinatorial coordinates for the
+aperiodic Spectre tiling", "Aperiodic Tilings V: the Refinable Frontier"),
+paper "Finite-state transducers for substitution tilings" arXiv 2512.16595
+(Dec 2025). VERIFIED (abstract and search snippets; the pages themselves are
+egress-blocked from the sandbox). The code ships in his puzzle collection's
+Penrose, hat and spectre grid generators, RECALLED.
 
 What this buys: a self-similar, non-periodic, repetitive addressing scheme
-where "zoom out by one level" is a single symbol drop. That is closer to
-what the fleet's lattices and vessels already do (hierarchical, versioned,
-never mutated) than any computation-on-the-tiles idea. If Penrose enters
-the system anywhere, this is the door I would point at.
+where "zoom out by one level" is a single symbol drop, with a regular
+language for neighbourhood. That is closer to what the fleet's lattices and
+vessels already do (hierarchical, versioned, never mutated) than any
+computation-on-the-tiles idea. If Penrose enters the system anywhere, this
+is the door I would point at, and the transducer approach is the one to
+copy, not reinvent.
 
-### 5c. The substrate (the tiling as the machine's tape)
+### 5c. The substrate (the tiling as the machine's tape) — universality proven
 
 Put a finite state on every tile and update by a local rule over the tile's
-neighbours. Owens & Stepney (RECALLED, 2010) ran Life-like rules on Penrose
-tilings; Goucher (RECALLED, 2012) found gliders on the kite/dart tiling. A
-glider plus a gun plus collisions is the standard road to a universal CA,
-and nothing in the geometry forbids it (the tiling is repetitive, so a
-construction that works in one place works everywhere; the varying
-neighbourhood sizes are the only obstacle). Whether universality has been
-*proven* on a Penrose substrate I do not know; treat as OPEN.
+neighbours. The history, all VERIFIED:
+
+| Year | Who | Result |
+|---|---|---|
+| 2010 | Owens & Stepney | Life rules on P2 and P3; still lifes and oscillators; statistics differ between kite/dart and rhombs; no glider found |
+| 2012 | Goucher | first glider on an aperiodic tiling: 4-state outer-totalistic CA, works on generic quadrilateral tilings. J. Cellular Automata 7(5–6) 385–392 |
+| 2012–13 | Imai, Hatsuda, Poupet, Sato | semi-totalistic CA on kite/dart simulating any boolean circuit, hence any Turing machine (AUTOMATA/JAC 2012; Fundamenta Informaticae 2013; a 6-state version, HAL lirmm-01476788). Key move: quasi-periodicity gives a constant N such that the circuit pattern appears in every N×N window |
+| 2013 | Sato, Imai, Iwamoto | rotation-symmetric von Neumann neighbourhood: a 5-state universal kite/dart CA (asynchronous circuits) and two 3-state CAs simulating universal logic elements (synchronous). CANDAR 2013 |
+| 2017 | Bailey & Lindsey | CA on any multigrid tiling that is *isomorphic* to Conway's Life, so gliders, signal delivery, universal computation and reproduction carry over; next state is a local computation. arXiv 1708.09301 |
+| 2020 | — | sandpile toppling on Penrose tilings (arXiv 2006.06254) |
+| 2023 | — | Life on the Robinson-triangle Penrose tiling: still lifes (arXiv 2302.10157) |
+
+So the question I left OPEN in the first draft is closed: **cellular
+automata on Penrose tilings are computationally universal**, by two
+independent routes (direct circuit embedding, and isomorphism to Life).
 
 The algorithmic self-assembly model (aTAM, Winfree 1998, KNOWN) is the other
 substrate: Wang-like tiles with glue strengths that attach only when
-sufficiently bound. aTAM is Turing universal. Penrose tiles in aTAM would
-need the glue-strength rule to do the non-local work that deceptions show
-is required; that is a real research question, not a build task.
+sufficiently bound. aTAM is Turing universal. A small JavaScript simulation
+of P3 self-assembly under Socolar's growth rules exists on GitHub
+(section 8), but I found no aTAM-universality result specific to Penrose
+tiles; that remains a research question, not a build task.
 
 ---
 
 ## 6. What could be built first (proposal, gated)
 
-Smallest experiments with a measured outcome. None of them touch existing
-vessels. Each is one new file.
+Revised after section 8. Smallest experiments with a measured outcome. None
+of them touch existing vessels. Each is one new file, except where an
+existing open-source tool is the better base.
 
 | # | Task | Measures | Gate |
 |---|---|---|---|
 | 1 | `penrose_sub.py`: rhombus inflation, N levels, exact coordinates in Z[φ] (no floats) | tile counts per level equal Fibonacci-matrix prediction; patch legality by vertex table = 100% | none (pure, new) |
 | 2 | Composition (deflation) on a patch; decide legality; feed it deliberate deceptions | every deception rejected, every inflated patch accepted; depth at rejection recorded | after 1 |
-| 3 | Conway address per tile; neighbour-by-carry; check two independently generated tilings agree on all radius-r patches | local-isomorphism radius observed vs the φ³/2 bound | after 2 |
-| 4 | Cut-and-project generator (de Bruijn pentagrid) with rational offsets; cross-check against 1 | identical patch statistics; per-tile agreement inside the window | after 1 |
-| 5 | CA on the tiling: reproduce a Goucher glider | glider period and displacement match the paper | after 3; needs the paper fetched and verified |
+| 3 | Combinatorial coordinates per tile, neighbour-by-transducer, following Tatham's construction rather than my sketch; check two independently generated tilings agree on all radius-r patches | local-isomorphism radius observed vs the φ³/2 bound; transducer state count | after 2; needs Tatham's paper fetched (arXiv is egress-blocked here) |
+| 4 | Cut-and-project generator (de Bruijn pentagrid) with rational offsets; cross-check against 1. `pywonderland` and `byewokko/penrose` already do this in Python and can be the reference | identical patch statistics; per-tile agreement inside the window | after 1 |
+| 5 | CA on the tiling: reproduce Goucher's glider, then Bailey–Lindsey's Life-isomorphic rule. `Grgs/cellular-automaton-lab` already runs rules on Penrose P3, hat and spectre patches and may be the cheaper base than writing a simulator | glider period and displacement match the paper; a Life glider survives on the Bailey–Lindsey rule | after 3; papers fetched and verified |
 
 If 1–3 pass, the fleet has a working formal system (alphabet, rules,
 decision procedure, canonical address) in a few hundred lines, and a
-verified statement of exactly what it can and cannot do. Task 5 is where
-"computational" would start to mean universal, and it is the one with an
-open literature question behind it.
+verified statement of exactly what it can and cannot do. Task 5 now has a
+known answer to reproduce rather than an open question to settle.
 
 What NOT to do: do not put Penrose structure into any lattice or A-Z. It is
 not knowledge and it is not a source (DEC-0004 by analogy). It is, at most,
@@ -250,26 +308,104 @@ an addressing scheme; and that is a MM_VERSION-level decision, not a script's.
 
 ## 7. Sources
 
-Verification status is about the *citation*, not the claim. The sandbox has
-no library access; nothing below was fetched today.
+Verification status is about the *citation*, not the claim. What "VERIFIED"
+means today: the sandbox egress proxy blocks arxiv.org, semanticscholar.org,
+wikipedia.org, chiark.greenend.org.uk, cp4space.hatsya.com and
+oldcitypublishing.com; github.com is reachable. So VERIFIED below means the
+citation and abstract were confirmed through search-engine snippets of those
+pages, or by fetching a reachable mirror (HAL, LIRMM, ADS, AMS, PubMed,
+Steinhardt's site), not by reading the paper. Nothing below was read in full.
 
 | Ref | Status |
 |---|---|
 | R. Penrose, "The rôle of aesthetics in pure and applied mathematical research", Bull. IMA 10 (1974) | KNOWN (the original) |
 | R. Penrose, "Pentaplexity", Math. Intelligencer 2 (1979) | KNOWN |
 | N. G. de Bruijn, "Algebraic theory of Penrose's non-periodic tilings of the plane I, II", Indag. Math. 43 (1981) | KNOWN |
-| B. Grünbaum & G. C. Shephard, *Tilings and Patterns* (1987), ch. 10 (Penrose, deceptions, composition), ch. 11 (Wang tiles) | KNOWN |
+| B. Grünbaum & G. C. Shephard, *Tilings and Patterns* (1987), ch. 10 (Penrose, deceptions, composition, index sequences), ch. 11 (Wang tiles) | KNOWN |
 | R. Berger, "The undecidability of the domino problem", Mem. AMS 66 (1966) | KNOWN |
 | R. M. Robinson, "Undecidability and nonperiodicity for tilings of the plane", Invent. Math. 12 (1971) | KNOWN |
 | J. Kari, "A small aperiodic set of Wang tiles", Discrete Math. 160 (1996) | KNOWN |
 | A. Connes, *Noncommutative Geometry* (1994), ch. II §3, Penrose tilings | KNOWN |
-| E. A. Robinson Jr, "The dynamical properties of Penrose tilings", Trans. AMS 348 (1996) | RECALLED, check volume/year |
-| G. Onoda, P. Steinhardt, D. DiVincenzo, J. Socolar, "Growing perfect quasicrystals", PRL 60 (1988) | RECALLED |
-| N. Owens & S. Stepney, "Investigations of Game of Life cellular automata rules on Penrose tilings", J. Cellular Automata (2010) | RECALLED |
-| A. P. Goucher, "Gliders in cellular automata on Penrose tilings", J. Cellular Automata 7 (2012) | RECALLED |
+| E. A. Robinson Jr, "The dynamical properties of Penrose tilings", Trans. AMS 348(11) (1996) 4447–4464 | VERIFIED (AMS page) |
+| G. Onoda, P. Steinhardt, D. DiVincenzo, J. Socolar, "Growing perfect quasicrystals", PRL 60(25) (1988) 2653–2656 | VERIFIED (PubMed, Steinhardt site) |
+| N. Owens & S. Stepney, "Investigations of Game of Life cellular automata rules on Penrose tilings: lifetime, ash, and oscillator statistics", J. Cellular Automata (2010); and "The Game of Life rules on Penrose tilings: still life and oscillators", in Adamatzky (ed.) *Game of Life Cellular Automata*, Springer (2010) | VERIFIED (York research database, Springer) |
+| A. P. Goucher, "Gliders in cellular automata on Penrose tilings", J. Cellular Automata 7(5–6) (2012) 385–392 | VERIFIED (publisher index; one index lists 2013) |
+| K. Imai, T. Hatsuda, V. Poupet, K. Sato, "A universal semi-totalistic cellular automaton on kite and dart Penrose tilings", AUTOMATA & JAC 2012; Fundamenta Informaticae (2013); arXiv 1208.2771; 6-state version HAL lirmm-01476788 | VERIFIED (HAL, LIRMM, ADS) |
+| K. Sato, K. Imai, C. Iwamoto, "Universal von Neumann neighborhood cellular automata on Penrose tilings", CANDAR 2013, IEEE | VERIFIED (IEEE Xplore 6726954) |
+| D. A. Bailey & K. A. Lindsey, "A Game of Life on Penrose tilings", arXiv 1708.09301 (2017) | VERIFIED (ADS, Complexity Digest) |
+| Z. Li & L. Boyle, "The Penrose tiling is a quantum error-correcting code", arXiv 2311.13040 (2023) | VERIFIED (Quanta 2024-02-23; Error Correction Zoo) |
+| "Quantum error-correcting codes from aperiodic monotiles: the hat and the spectre", arXiv 2607.15326 (2026) | VERIFIED (title only) |
+| S. Labbé, "Metallic mean Wang tiles II: the dynamics of an aperiodic computer chip", Forum of Math. Sigma (2025); arXiv 2403.03197 | VERIFIED (Cambridge Core) |
+| S. Tatham, "Beyond the wall: working with aperiodic tilings using finite-state transducers" and related posts (2024); "Finite-state transducers for substitution tilings", arXiv 2512.16595 (2025) | VERIFIED (search snippets; site blocked) |
+| N. Vereshchagin, "Matching rules for substitution and hierarchical tilings for any substitution with finite local complexity", arXiv 2606.25005 (2026) | VERIFIED (abstract) |
+| F. D'Andrea, "A guide to Penrose tilings", arXiv 2310.18950 (2023) | VERIFIED (title); modern survey, good first fetch for Dispatch |
 | E. Winfree, *Algorithmic Self-Assembly of DNA*, PhD thesis, Caltech (1998) | KNOWN |
 | M. Baake & U. Grimm, *Aperiodic Order*, vol. 1 (2013) | KNOWN (the modern reference for 2b–2d) |
 | M. Senechal, *Quasicrystals and Geometric Order* (1995) | KNOWN |
 | R. Penrose, *The Emperor's New Mind* (1989), ch. 4, tilings and non-computability | KNOWN |
 | R. Penrose, "Angular momentum: an approach to combinatorial space-time" (1971), spin networks | KNOWN |
-| D. Smith, J. S. Myers, C. Kaplan, C. Goodman-Strauss, "An aperiodic monotile" (2023) | KNOWN; relevant if a one-tile alphabet is ever wanted |
+| D. Smith, J. S. Myers, C. Kaplan, C. Goodman-Strauss, "An aperiodic monotile", Combinatorial Theory 4(1) (2024); "A chiral aperiodic monotile", 4(2) (2024) | VERIFIED (via the Lean repo README) |
+
+---
+
+## 8. Prior art found online, 2026-09-17
+
+Question asked: is anyone using this idea, on GitHub or elsewhere? Answer:
+yes, in every direction this note proposes, and one direction it did not
+anticipate (error correction). Nobody found is doing it for the fleet's
+purpose (addressing for a versioned knowledge store), and nothing found is
+positioned as "Penrose as a formal system"; the pieces are spread across
+CA people, dynamicists, a puzzle author, a Lean formaliser and quantum
+information theorists.
+
+### 8a. GitHub — computation or formalism, not just drawing
+
+| Repo | What | Language | Signal |
+|---|---|---|---|
+| `Grgs/cellular-automaton-lab` | "topology-first" CA playground: one rule engine over 68 tiling families incl. Penrose P3, pinwheel, hat, turtle, spectre, Taylor–Socolar; 15 built-in rules (Life-like, excitable, signal) | Python + TypeScript, MIT | 1,079 commits, v0.5.0, 0 stars. Active, unknown. The closest thing to task 5's base |
+| `IntKecsk/Apery` | Penrose P3 generator by triple deflation plus CA simulator (Life, von Neumann CA planned) | C++/Qt5, GPL-3 | 14 commits, 1 star, early |
+| `jsm28/AperiodicMonotilesLean` | Lean formalisation of the hat and spectre papers by their second author, staging for mathlib | Lean | 180 commits, steps 1–2 of 24 in progress. Penrose tilings not covered. The only *formal-proof* work found |
+| `kosh90/self-assembly_penrose_tiles-check` | self-assembly of P3 under Socolar's growth rules, browser demo | JavaScript/Paper.js | 5 commits, toy |
+| `neozhaoliang/pywonderland` | de Bruijn pentagrid Penrose among many maths demos | Python | 4.2k stars; reference implementation for task 4 |
+| `byewokko/penrose` | de Bruijn multigrid generator | Python | 17 stars |
+| `cimi/penrose-tiling`, `luke-r-mills/L_System_Penrose_Generator` | Penrose via L-systems | JS; Processing | small; confirm 2b is how people actually build it |
+| `PenroseRhombus_PCB` | PCBs tiling a P3 with addressable LEDs | hardware | physical substrate for a CA, 2 stars |
+| `QuasiCrystal.jl` | Fibonacci chain, Penrose, Ammann–Beenker for physics | Julia | 4 stars |
+
+Plain generators (drawing only): `xnx/penrose`, `JesusFreke/pynrose`,
+`samm00/penrose`, `bpandreotti/rose` (Rust), `roothch/TilingGallery` (Rust,
+pentagrid), `apaleyes/penrose-tiling` (JS), `mathworks/penrose-tiling`,
+`arnfred/Penrose`, `cole-k/Penrose-Tiling`, `daneroo/im-penrose`, and a
+dozen more under the `penrose-tilings` topic. None carries matching-rule
+checking or composition as a decision procedure, as far as the READMEs
+show.
+
+Not found on GitHub: a composition-based legality checker; Tatham's
+transducer code as a standalone library (it lives inside his puzzle
+collection); any Lean or Coq formalisation of Penrose tilings themselves.
+
+### 8b. Literature — who has done what
+
+| Idea in this note | Already done by |
+|---|---|
+| 5c universality on the substrate | Imai–Hatsuda–Poupet–Sato 2012/13; Sato–Imai–Iwamoto 2013; Bailey–Lindsey 2017 |
+| 5b hierarchical addressing with a regular neighbour language | Tatham 2024–25 (Penrose, hat, spectre) |
+| 3 "cannot store a bit in the geometry" | inverted into a QECC by Li–Boyle 2023; extended to hat/spectre 2026 |
+| 2a Penrose as sofic / Wang sub-language | Goodman-Strauss; Vereshchagin 2026 |
+| 3 "Kari's tiles compute, Penrose's are computed" | Labbé 2024 builds the computing side out for every metallic mean |
+| 2d dynamics | Robinson 1996; a 2026 Markov-partition construction for hat tilings (arXiv 2604.20964) |
+| Local growth | Onoda et al. 1988; "Growing perfect decagonal quasicrystals by local rules" (arXiv 0704.0848) |
+
+### 8c. What this changes
+
+- Task 5 is a reproduction, not a research question.
+- Task 3 should follow Tatham, whose construction is published and tested
+  on three tilings, instead of my sketch.
+- The one genuinely under-explored corner I can see is the *decision
+  procedure* (composition-based legality with deception detection) as a
+  standalone, tested artefact; nobody on GitHub ships one. That is task 2,
+  and it is small.
+- The error-correction result is the strongest argument that Penrose
+  geometry is a computational system in its own right, and it is the one
+  that maps least onto anything the fleet does. Worth knowing, not worth
+  building on here.
