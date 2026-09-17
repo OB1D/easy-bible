@@ -409,3 +409,91 @@ collection); any Lean or Coq formalisation of Penrose tilings themselves.
   geometry is a computational system in its own right, and it is the one
   that maps least onto anything the fleet does. Worth knowing, not worth
   building on here.
+
+---
+
+## 9. Gödel and geometry: is a piece missing? (added 2026-09-17, second question)
+
+Question asked: Gödel's incompleteness theorem; is there a piece of the
+puzzle missing with geometry? Short answer: no piece is missing, but
+geometry is where the puzzle's edge is visible, and it is the same edge
+sections 3 and 5c keep hitting.
+
+**What Gödel needs.** The first theorem applies to a theory only if it is
+consistent, recursively axiomatised, and interprets enough arithmetic to
+encode its own sentences (Robinson's Q suffices). Remove any one and the
+theorem is silent. Geometry fails the third. KNOWN.
+
+**Plain geometry is complete.** Tarski (1951): first-order Euclidean
+geometry, i.e. the theory of real closed fields, is complete and decidable
+by quantifier elimination. Hilbert's second-order axioms (1899, with the
+completeness axiom) are categorical. So geometry is not a hole in Gödel's
+picture; it is the textbook example of a mathematics Gödel leaves alone.
+KNOWN.
+
+**The price.** Real closed fields cannot say "x is an integer". The
+continuum offers no place to write an unbounded string of discrete symbols,
+so no sentence can refer to itself. Presburger arithmetic escapes the same
+way by dropping multiplication. Completeness is bought by giving up the
+capacity to store arbitrary finite information inside the theory. That is
+the zero-entropy fact of section 3 in another dress: a Penrose tiling
+cannot hold a bit, and patch legality is decidable. MINE as the framing;
+each half KNOWN.
+
+**Where geometry lets Gödel back in.** As soon as an unbounded discrete
+structure is laid on the plane, arithmetic returns:
+
+| Discrete structure on a geometric substrate | Status |
+|---|---|
+| Wang's domino problem (does a finite tile set tile the plane) | undecidable, Berger 1966. KNOWN |
+| Domino problem in the hyperbolic plane | undecidable, Margenstern 2008 and Kari. RECALLED |
+| Homeomorphism of manifolds, dimension ≥ 4 | undecidable, Markov 1958, via the word problem for groups. KNOWN |
+| Halting of a configuration on a universal Penrose-substrate CA (section 5c) | undecidable. MINE, immediate from universality |
+| Legality of a finite Penrose patch (section 3) | decidable. RECALLED |
+
+The boundary runs through the Penrose tiling itself: the geometry is on
+the decidable side, the geometry plus states on the tiles is on the other.
+
+**The structural view.** If the popular telling is missing a piece, it is
+that incompleteness is not about numbers. Lawvere's fixed-point theorem
+(1969; Yanofsky 2003 for the survey) shows Cantor's diagonal, Gödel's
+sentence, Tarski's undefinability of truth, Turing's halting problem and
+Russell's paradox are one theorem about self-reference in any cartesian
+closed category with a point-surjective map onto its own function space.
+Numbers are the cheapest carrier. Geometry neither adds nor removes the
+phenomenon; it only decides whether a carrier is available. KNOWN.
+
+**On Penrose's own use of Gödel.** *The Emperor's New Mind* (1989) and
+*Shadows of the Mind* (1994) argue from Gödel that mathematical insight is
+non-computable, with tilings as the illustration. Putnam, Feferman, Davis
+and Franzén rejected the argument: Gödel shows a consistent system cannot
+prove its own consistency, not that a human can see truths no system can.
+KNOWN that the critiques exist; the fleet should not build doctrine on the
+argument.
+
+**For the formal-system thread.** The knob is information capacity.
+
+| Below the line: complete, decidable, cannot count | Above the line: expressive, incomplete, undecidable |
+|---|---|
+| real closed fields (Tarski) | Peano arithmetic |
+| Presburger arithmetic | Wang tilings |
+| Rabin's monadic theory of the infinite binary tree (S2S) | any universal substrate, Penrose CA included |
+| Penrose patch legality | Penrose CA halting |
+
+A Penrose tiling is interesting here because it sits on the line and one
+steps over it by adding states to the tiles. Nothing is missing. The
+puzzle has an edge, and geometry is where a finger can be put on it.
+
+Sources for this section, all KNOWN unless tagged: A. Tarski, *A Decision
+Method for Elementary Algebra and Geometry* (1951); D. Hilbert,
+*Grundlagen der Geometrie* (1899); M. Presburger (1929); R. Berger (1966);
+M. Margenstern, "The domino problem of the hyperbolic plane is
+undecidable", Theor. Comp. Sci. 407 (2008), RECALLED; A. A. Markov,
+"Insolubility of the problem of homeomorphy" (1958); F. W. Lawvere,
+"Diagonal arguments and cartesian closed categories" (1969); N. Yanofsky,
+"A universal approach to self-referential paradoxes, incompleteness and
+fixed points", Bull. Symb. Logic 9 (2003); M. O. Rabin, "Decidability of
+second-order theories and automata on infinite trees", Trans. AMS 141
+(1969); T. Franzén, *Gödel's Theorem: An Incomplete Guide to Its Use and
+Abuse* (2005); H. Putnam, review of *Shadows of the Mind*, Bull. AMS 32
+(1995); S. Feferman, "Penrose's Gödelian argument", Psyche 2 (1995).
